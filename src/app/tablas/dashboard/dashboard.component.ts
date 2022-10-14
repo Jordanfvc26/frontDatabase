@@ -1,6 +1,8 @@
+import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 import * as iconosfab from '@fortawesome/free-brands-svg-icons';
+import { Tablas, Columna } from 'src/app/interfaces/tablas';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +11,15 @@ import * as iconosfab from '@fortawesome/free-brands-svg-icons';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  
+  tablas: Tablas[] = []
+  
+  constructor(private api: ConsumirServiciosService) { }
 
   ngOnInit(): void {
+    this.api.obtenerTablas().subscribe(data => {
+      this.tablas = data;
+    })
   }
 
 

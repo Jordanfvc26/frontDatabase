@@ -25,34 +25,32 @@ export class LoginComponent implements OnInit {
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
     {
-      //key: 'Input',
+      key: 'email',
       type: 'input',
       props: {
         label: 'Email:',
         placeholder: 'usuario@gmail.com',
         minLength: 8,
-        required: true,
-        formControlName: 'email'
+        required: true
       },
     },
     {
-      //key: 'Input',
+      key: 'password',
       type: 'input',
       props: {
         label: 'Contraseña:',
         placeholder: 'Contraseña',
         minLength: 8,
         type: 'password',
-        required: true,
-        formControlName: 'email'
+        required: true
       },
     }
   ];
 
 
   iniciarSesion() {
-    console.log(this.form)
-    if (this.form.valid) {
+    
+    if (this.model.email == "jordan123") {
       this.ruta.navigateByUrl('/tablas/dashboard');
     }
     
