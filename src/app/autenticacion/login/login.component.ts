@@ -49,11 +49,8 @@ export class LoginComponent implements OnInit {
 
 
   iniciarSesion() {
-    
     if (this.model.email == "jordan123") {
       this.ruta.navigateByUrl('/tablas/dashboard');
     }
-    
-    
   }
 }

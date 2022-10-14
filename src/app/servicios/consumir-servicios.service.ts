@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { Tablas } from '../interfaces/tablas';
+import { Columna, Tablas } from '../interfaces/tablas';
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +16,9 @@ export class ConsumirServiciosService {
     let ruta = this.url;
     return this.http.get<Tablas[]>(ruta);
   }
+
+  /*obtenerColumnas():Observable<Columna[]>{
+    let ruta = this.url;
+    return this.http.get<Columna[]>(ruta);
+  }*/
 }

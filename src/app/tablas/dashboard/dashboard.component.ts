@@ -1,3 +1,5 @@
+import { ListarComponent } from './../../columnas/listar/listar.component';
+import { Router } from '@angular/router';
 import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +16,7 @@ export class DashboardComponent implements OnInit {
   
   tablas: Tablas[] = []
   
-  constructor(private api: ConsumirServiciosService) { }
+  constructor(private api: ConsumirServiciosService, private ruta: Router) { }
 
   ngOnInit(): void {
     this.api.obtenerTablas().subscribe(data => {
@@ -22,6 +24,14 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  columnasAenviar: ListarComponent | undefined
+  
+
+  enviarColumnas(columna:Columna[]){
+    this.ruta.navigateByUrl('/columnas/listar');
+     this.columnasAenviar = new ListarComponent(columna);
+        
+  }
 
   //Iconos a utilizar
   iconAgregar = iconos.faPlus;

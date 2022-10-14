@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./tablas/tablas.module').then(m => m.TablasModule)
   },
   {
+    path: 'columnas',
+    loadChildren: () => import('./columnas/columnas.module').then(m => m.ColumnasModule)
+  },
+  {
     path: '**',
     redirectTo: 'autenticacion'
   }

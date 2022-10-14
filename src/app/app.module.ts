@@ -1,3 +1,4 @@
+import { ColumnasModule } from './columnas/columnas.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { NgModule } from '@angular/core';

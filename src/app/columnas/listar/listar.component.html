@@ -11,7 +11,7 @@
 <div class="container">
 
     <div class="contenedor-texto">
-        <h3>TABLAS</h3>
+        <h3>COLUMNAS</h3>
         <!--<fa-icon [icon]="iconAgregar"></fa-icon>-->
         <form>
             <button type="submit" class="btn btn-primary">Nueva</button>
@@ -25,19 +25,18 @@
               <tr>
                 <th class="col-1">#</th>
                 <th class="col-4">Nombre</th>
-                <th class="col-3">N° Columnas</th>
-                <th class="col-4">Acciones</th>
+                <th class="col-3">Tipo de dato</th>
+                <th class="col-4">¿Es nulo?</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let tabla of tablas; let i = index">
+              <tr *ngFor="let tabla of columnas_; let i = index">
                 <th scope="row">{{i+1}}</th>
-                <td>{{tabla.table}}</td>
-                <td>{{tabla.columnas.length}}</td>
+                <td>{{tabla.column_name}}</td>
+                <td>{{tabla.data_type}}</td>
+                <td>{{tabla.is_nullable}}</td>
                 <td class="acciones">
-                    <button (click)="enviarColumnas(tabla.columnas)" type="submit" class="btn btn-success">Columnas</button>
                     <button type="submit" class="btn btn-warning">Editar</button>
-                    <button type="submit" class="btn btn-success">Permisos</button>
                 </td>
               </tr>
               
