@@ -11,33 +11,37 @@
 <div class="container">
 
     <div class="contenedor-texto">
-        <h3>TABLAS</h3>
-        <!--<fa-icon [icon]="iconAgregar"></fa-icon>-->
+        <h3><fa-icon [icon]="iconTabla"></fa-icon> TABLAS</h3>
         <form>
-            <button type="submit" class="btn btn-primary">Nueva</button>
-            <input class="search form-control" type="text" placeholder="Buscar tablas" name="buscarTablas" >
+            <button (click)="nuevaTablaColumnas(crearTabla)" type="button" class="btn btn-primary"><fa-icon [icon]="iconAgregar"></fa-icon> Nueva</button>
+            <input class="search form-control" type="text" placeholder="Buscar tablas...">
         </form>
     </div>
 
     <div class="contenedor-tabla">
-        <table class="table align-items-center">
+        <table class="table">
             <thead>
               <tr>
-                <th class="col-1">#</th>
+                <!--<th class="col-1">#</th>-->
                 <th class="col-4">Nombre</th>
                 <th class="col-3">N° Columnas</th>
-                <th class="col-4">Acciones</th>
+                <th class="col-5">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let tabla of tablas; let i = index">
-                <th scope="row">{{i+1}}</th>
+                <!--<th scope="row">{{i+1}}</th>-->
                 <td>{{tabla.table}}</td>
                 <td>{{tabla.columnas.length}}</td>
                 <td class="acciones">
-                    <button (click)="enviarColumnas(tabla.columnas)" type="submit" class="btn btn-success">Columnas</button>
-                    <button type="submit" class="btn btn-warning">Editar</button>
-                    <button type="submit" class="btn btn-success">Permisos</button>
+                    <!-- <button (click)="enviarColumnas(tabla.columnas)" type="submit" class="btn btn-primary"><fa-icon [icon]="iconVerDetalles"></fa-icon></button> -->
+                    <!-- <button type="submit" class="btn btn-warning">Editar</button>
+                    <button type="submit" class="btn btn-success">Permisos</button> -->
+                    <!---------->
+                    <fa-icon id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
+                    <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon>
+                    <fa-icon id="iconPermisos" [icon]="iconPermisos"></fa-icon>
+                    <fa-icon id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
               
@@ -45,3 +49,8 @@
         </table>
     </div>
 </div>
+
+<!--Modal para crear una nueva tabla-->
+<ng-template #crearTabla let modal>
+    <app-crear></app-crear>
+</ng-template>

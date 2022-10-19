@@ -1,1 +1,41 @@
-<p>crear works!</p>
+<!--Pestaña "General" la cual se usa para crear una tabla con la información correspondiente-->
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title">Nueva Tabla</h4>
+    </div>
+
+    <div class="modal-body" *ngIf="!general; else columnas">
+        <nav class="nav nav-tabs nav-fill" >
+            <a class="nav-link active" (click)="pestaniaGeneral()">General</a>
+            <a class="nav-link" (click)="pestaniaColumnas()">Columnas</a>
+        </nav>
+        <div class="campos-form">
+            <form>
+                <formly-form [model]="modelNewTabla" [fields]="fieldsNewTabla" [options]="optionsNewTabla" [form]="formNewTabla">
+                </formly-form>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" class="btn btn-danger" type="button">Cancelar</button>
+        <button (click)="guardarDatosNewTabla()" class="btn btn-success" type="button">Guardar</button>
+    </div>
+</div>
+
+
+<!--Pestaña "Columnas del modal la cual se usa para agregar las columnas"-->
+<ng-template #columnas>
+    <div class="modal-body">
+        <nav class="nav nav-tabs nav-fill">
+            <a class="nav-link" (click)="pestaniaGeneral()">General</a>
+            <a class="nav-link active" (click)="pestaniaColumnas()">Columnas</a>
+        </nav>
+        <div class="campos-form">
+            <form>
+                <formly-form [model]="modelNewColumnas" [fields]="fieldsNewColumnas" [options]="optionsNewColumnas" [form]="formNewColumnas">
+                </formly-form>
+            </form>
+        </div>
+    </div>
+</ng-template>

@@ -7,6 +7,7 @@
 .contenedor-tabla{
     border: 1px solid rgb(197, 197, 197);
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 
 form{
@@ -26,6 +27,32 @@ form .search{
 }
 
 .acciones button{
-    width: 25%;
+    width: 27%;
     margin-right: 20px;
+}
+
+fa-icon{
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+fa-icon:hover{
+    cursor: pointer;
+}
+
+
+#iconVerDetalles{
+    color: #2271b3;
+}
+
+#iconEditar{
+    color: #4eb14e;
+}
+
+#iconPermisos{
+    color: #F4A020;
+}
+
+#iconEliminar{
+    color: red;
 }

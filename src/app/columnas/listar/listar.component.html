@@ -23,7 +23,7 @@
         <table class="table align-items-center">
             <thead>
               <tr>
-                <th class="col-1">#</th>
+                <!--<th class="col-1">#</th>-->
                 <th class="col-4">Nombre</th>
                 <th class="col-3">Tipo de dato</th>
                 <th class="col-4">¿Es nulo?</th>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let tabla of columnas_; let i = index">
-                <th scope="row">{{i+1}}</th>
+                <!--<th scope="row">{{i+1}}</th>-->
                 <td>{{tabla.column_name}}</td>
                 <td>{{tabla.data_type}}</td>
                 <td>{{tabla.is_nullable}}</td>

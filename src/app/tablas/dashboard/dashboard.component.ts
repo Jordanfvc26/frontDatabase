@@ -6,6 +6,10 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
 import * as iconosfab from '@fortawesome/free-brands-svg-icons';
 import { Tablas, Columna } from 'src/app/interfaces/tablas';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,11 +20,12 @@ export class DashboardComponent implements OnInit {
   
   tablas: Tablas[] = []
   
-  constructor(private api: ConsumirServiciosService, private ruta: Router) { }
+  constructor(private api: ConsumirServiciosService, private ruta: Router, public modal: NgbModal) { }
 
   ngOnInit(): void {
     this.api.obtenerTablas().subscribe(data => {
-      this.tablas = data;
+      /*this.tablas = data.data;*/
+      console.log(data)
     })
   }
 
@@ -33,6 +38,17 @@ export class DashboardComponent implements OnInit {
         
   }
 
+  //Método que abre el modal para poder crear una tabla con sus respectivas columnas
+  nuevaTablaColumnas(crearTabla:any){
+    this.modal.open(crearTabla,{size: 'xl', scrollable: true});
+  }
+
   //Iconos a utilizar
   iconAgregar = iconos.faPlus;
+  iconBuscar = iconos.faMagnifyingGlass;
+  iconTabla = iconos.faTable;
+  iconVerDetalles = iconos.faEye;
+  iconEditar = iconos.faPenToSquare;
+  iconPermisos = iconos.faUserLock;
+  iconEliminar = iconos.faTrash;
 }

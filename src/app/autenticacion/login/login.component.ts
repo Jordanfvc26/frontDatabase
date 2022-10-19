@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  form = new FormGroup({
-    
-  });
+  form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
