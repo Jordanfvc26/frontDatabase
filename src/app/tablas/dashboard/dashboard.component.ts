@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.obtenerTablas().subscribe(data => {
-      /*this.tablas = data.data;*/
+      this.tablas = data.data;
       console.log(data)
     })
   }

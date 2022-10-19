@@ -1,3 +1,4 @@
+import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
@@ -14,7 +15,7 @@ export class CrearComponent implements OnInit {
 
   general: boolean = false;
 
-  constructor(public modal: NgbModal) { }
+  constructor(public modal: NgbModal, private api: ConsumirServiciosService) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,7 @@ export class CrearComponent implements OnInit {
   optionsNewTabla: FormlyFormOptions = {};
   fieldsNewTabla: FormlyFieldConfig[] = [
     {
-      key: 'nombreTabla',
+      key: 'table',
       type: 'input',
       props: {
         label: 'Nombre:',
@@ -94,7 +95,7 @@ export class CrearComponent implements OnInit {
           {
             className: 'col-3',
             type: 'input',
-            key: 'tipoDato',
+            key: 'tipo',
             props: {
               label: 'Tipo de Dato',
               required: true,
@@ -103,7 +104,7 @@ export class CrearComponent implements OnInit {
           {
             className: 'col-2',
             type: 'input',
-            key: 'longitud',
+            key: 'length',
             props: {
               label: 'Longitud',
               required: true,
@@ -125,7 +126,7 @@ export class CrearComponent implements OnInit {
           },
           {
             className: 'col-2',
-            key: 'aceptaNulo',
+            key: 'notNull',
             type: 'select',
             props: {
               label: 'Acepta Nulos?',
@@ -152,7 +153,29 @@ export class CrearComponent implements OnInit {
   }
 
   guardarDatosNewTabla(){
-    console.log(this.modelNewTabla);
-    console.log(this.modelNewColumnas);
+    
+
+    var formData :string = '{"table": "probando588", "columnas": ['+
+      '{'+
+        '"nombre": "nombrePrim",'+
+        '"tipo": "character",'+
+        '"notNull": "SI",'+
+        '"length": 50,'+
+        '"primaryKey": false'+
+      '}'+
+    ']}'
+
+    const obj = JSON.parse(formData);
+
+    this.api.crearTablasColumnas(obj).subscribe(data => {
+      console.log(data);
+      if(data.tokenValido){
+        alert("Se insertó correctamente");
+      }
+      else{
+        alert("Hubo un error");
+      }
+    })
+ 
   }
 }

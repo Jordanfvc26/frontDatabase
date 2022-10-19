@@ -8,13 +8,16 @@ import { Columna, Tablas } from '../interfaces/tablas';
 })
 export class ConsumirServiciosService {
 
-  url:string = "​http://localhost:3356/api/base-datos/mostrar/tablas-columnas"
+  url:string = "http://localhost:3356/api/base-datos";
 
   constructor(private http:HttpClient) { }
 
   obtenerTablas():Observable<any>{
-    let ruta = this.url;
-    return this.http.get<any>(ruta);
+    return this.http.get<any>(this.url+"/mostrar/tablas-columnas");
+  }
+
+  crearTablasColumnas(formDatos: any):Observable<any>{
+    return this.http.post(this.url+"/crear/tabla-columnas", formDatos);
   }
 
   /*obtenerColumnas():Observable<Columna[]>{
