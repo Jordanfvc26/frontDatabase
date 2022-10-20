@@ -1,4 +1,4 @@
-import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
+import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 import { Columna } from './../../interfaces/tablas';
 import { Component, Inject, OnInit } from '@angular/core';
 

@@ -1,4 +1,3 @@
-import { ColumnasModule } from './columnas/columnas.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { NgModule } from '@angular/core';
@@ -12,6 +11,8 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+
+/*Para poder usar el modal que ofrece Bootstrap*/
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 

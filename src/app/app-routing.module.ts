@@ -1,10 +1,7 @@
-import { DashboardComponent } from './tablas/dashboard/dashboard.component';
-import { RegistroComponent } from './autenticacion/registro/registro.component';
-import { LoginComponent } from './autenticacion/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
+/*Aplicando el Lazy Loading (Cargar Perezosa)*/
 const routes: Routes = [
   {
     path: 'autenticacion',
@@ -22,11 +19,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'autenticacion'
   }
-
-  /*{path:"", pathMatch:"full", redirectTo:"login"},
-  {path: "login", component:LoginComponent},
-  {path: "registro", component:RegistroComponent},
-  {path: "dashboard", component:DashboardComponent}*/
 ];
 
 @NgModule({

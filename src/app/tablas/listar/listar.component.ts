@@ -1,24 +1,20 @@
-import { ListarComponent } from './../../columnas/listar/listar.component';
 import { Router } from '@angular/router';
-import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
+import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
-import * as iconos from '@fortawesome/free-solid-svg-icons';
-import * as iconosfab from '@fortawesome/free-brands-svg-icons';
-import { Tablas, Columna } from 'src/app/interfaces/tablas';
+import { Tablas } from 'src/app/interfaces/tablas';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-
-
+import * as iconos from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-listar',
+  templateUrl: './listar.component.html',
+  styleUrls: ['./listar.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class ListarComponent implements OnInit {
 
-  
   tablas: Tablas[] = []
+  columnasAenviar: ListarComponent | undefined
   
   constructor(private api: ConsumirServiciosService, private ruta: Router, public modal: NgbModal) { }
 
@@ -27,15 +23,6 @@ export class DashboardComponent implements OnInit {
       this.tablas = data.data;
       console.log(data)
     })
-  }
-
-  columnasAenviar: ListarComponent | undefined
-  
-
-  enviarColumnas(columna:Columna[]){
-    this.ruta.navigateByUrl('/columnas/listar');
-     this.columnasAenviar = new ListarComponent(columna);
-        
   }
 
   //Método que abre el modal para poder crear una tabla con sus respectivas columnas
@@ -51,4 +38,5 @@ export class DashboardComponent implements OnInit {
   iconEditar = iconos.faPenToSquare;
   iconPermisos = iconos.faUserLock;
   iconEliminar = iconos.faTrash;
+
 }

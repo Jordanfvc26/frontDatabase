@@ -1,9 +1,16 @@
-import { ConsumirServiciosService } from './../../servicios/consumir-servicios.service';
+import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
 
+/*Importaciones necesarias para poder usar el Formly*/
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+
+/*Importamos el componente de Alertas para usar las alertas emergentes.*/
+import { Alerts } from 'src/app/alerts/alerts.component';
+import * as iconos from '@fortawesome/free-solid-svg-icons';
+
+
 
 @Component({
   selector: 'app-crear',
@@ -12,15 +19,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 })
 export class CrearComponent implements OnInit {
 
-
   general: boolean = false;
+  
+  constructor(
+    public modal: NgbModal, 
+    private api: ConsumirServiciosService, 
+    public alertaEmergente: Alerts
+  ) { }
 
-  constructor(public modal: NgbModal, private api: ConsumirServiciosService) { }
 
   ngOnInit(): void {
   }
 
-  /*Form para crear la tabla*/
+  /*Form para crear la Tabla*/
   formNewTabla = new FormGroup({});
   modelNewTabla: any = {};
   optionsNewTabla: FormlyFormOptions = {};
@@ -34,41 +45,9 @@ export class CrearComponent implements OnInit {
         required: true
       },
     },
-    {
-      key: 'owner',
-      type: 'select',
-      props: {
-        label: 'Owner:',
-        placeholder: 'postgres',
-        required: true,
-        options: [
-          { value: 1, label: 'postgres' },
-          { value: 1, label: 'jvera' },
-          { value: 2, label: 'lmore' },
-          { value: 3, label: 'imanzaba' },
-        ],
-      },
-    },
-    {
-      key: 'schema',
-      type: 'select',
-      props: {
-        label: 'Schema:',
-        placeholder: 'public',
-        required: true,
-        options: [
-          { value: 1, label: 'public' },
-          { value: 1, label: 'clientes' },
-          { value: 2, label: 'ventas' },
-          { value: 3, label: 'vendedores' },
-        ],
-      },
-    },
   ];
 
-  
-
-  /*Form para crear las columnas */
+  /*Form para crear las Columnas */
   formNewColumnas = new FormGroup({});
   modelNewColumnas: any = {};
   optionsNewColumnas: FormlyFormOptions = {};
@@ -84,7 +63,7 @@ export class CrearComponent implements OnInit {
         fieldGroupClassName: 'row',
         fieldGroup:[
           {
-            className: 'col-4',
+            className: 'col-5',
             type: 'input',
             key: 'nombre',
             props: {
@@ -94,11 +73,19 @@ export class CrearComponent implements OnInit {
           },
           {
             className: 'col-3',
-            type: 'input',
             key: 'tipo',
+            type: 'select',
             props: {
-              label: 'Tipo de Dato',
+              label: 'Tipo de datos',
+              placeholder: 'Seleccione',
               required: true,
+              options: [
+                { value: "char", label: 'char' },
+                { value: "character", label: 'character' },
+                { value: "numeric", label: 'numeric' },
+                { value: "date", label: 'date' },
+                { value: "boolean", label: 'boolean' },
+              ],
             },
           },
           {
@@ -106,11 +93,11 @@ export class CrearComponent implements OnInit {
             type: 'input',
             key: 'length',
             props: {
-              label: 'Longitud',
+              label: 'Longitud:',
               required: true,
             },
           },
-          {
+          /*{
             className: 'col-1',
             key: 'primaryKey',
             type: 'select',
@@ -119,22 +106,21 @@ export class CrearComponent implements OnInit {
               placeholder: 'Sí',
               required: true,
               options: [
-                { value: 1, label: 'Sí' },
-                { value: 2, label: 'No' },
+                { value: true, label: 'Sí' },
+                { value: false, label: 'No' },
               ],
             },
-          },
+          },*/
           {
             className: 'col-2',
             key: 'notNull',
             type: 'select',
             props: {
-              label: 'Acepta Nulos?',
+              label: '¿Acepta Nulos?',
               placeholder: 'Sí',
               required: true,
               options: [
-                { value: 1, label: 'Sí' },
-                { value: 2, label: 'No' },
+                { value: "SI", label: 'Sí' },
               ],
             },
           },
@@ -144,38 +130,33 @@ export class CrearComponent implements OnInit {
   ];
 
 
+  //Métodos que cambia el estado de la variable general para poder cambiar de pestaña en el modal
   pestaniaGeneral(){
     this.general = false;
   }
-
-  pestaniaColumnas(){
+  pestaniaColumnas(columnas:any){
     this.general = true;
   }
 
+  //Método que manda a insertar la tabla y columna(s) que se está creando.
   guardarDatosNewTabla(){
-    
-
-    var formData :string = '{"table": "probando588", "columnas": ['+
-      '{'+
-        '"nombre": "nombrePrim",'+
-        '"tipo": "character",'+
-        '"notNull": "SI",'+
-        '"length": 50,'+
-        '"primaryKey": false'+
-      '}'+
-    ']}'
-
-    const obj = JSON.parse(formData);
-
-    this.api.crearTablasColumnas(obj).subscribe(data => {
-      console.log(data);
+    var datosTabla : JSON = <JSON><unknown>{
+      "table": this.modelNewTabla.table,
+      "columnas": this.modelNewColumnas.columnas
+    }
+    this.api.crearTablasColumnas(datosTabla).subscribe(data => {
       if(data.tokenValido){
-        alert("Se insertó correctamente");
+        this.alertaEmergente.alertaMensajeOK("La tabla se creó correctamente");
+        this.modal.dismissAll();
       }
       else{
-        alert("Hubo un error");
+        this.alertaEmergente.alertMensajeError("Existió un error inesperado y no se creó la tabla");
       }
     })
- 
   }
+
+  //Iconos a utilizar
+  iconGuardar = iconos.faFloppyDisk;
+  iconCancelar = iconos.faXmark;
+  iconTabla = iconos.faTable;
 }

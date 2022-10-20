@@ -34,23 +34,28 @@
                 <td>{{tabla.table}}</td>
                 <td>{{tabla.columnas.length}}</td>
                 <td class="acciones">
-                    <!-- <button (click)="enviarColumnas(tabla.columnas)" type="submit" class="btn btn-primary"><fa-icon [icon]="iconVerDetalles"></fa-icon></button> -->
-                    <!-- <button type="submit" class="btn btn-warning">Editar</button>
-                    <button type="submit" class="btn btn-success">Permisos</button> -->
-                    <!---------->
-                    <fa-icon id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
-                    <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon>
-                    <fa-icon id="iconPermisos" [icon]="iconPermisos"></fa-icon>
-                    <fa-icon id="iconEliminar" [icon]="iconEliminar"></fa-icon>
+                    <fa-icon data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
+                    <!-- <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon> -->
+                    <fa-icon data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
+                    <fa-icon data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
-              
             </tbody>
         </table>
     </div>
 </div>
 
+
 <!--Modal para crear una nueva tabla-->
 <ng-template #crearTabla let modal>
     <app-crear></app-crear>
 </ng-template>
+
+
+<!--Script para poder usar el Tooltip de Bootstrap-->
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="mensaje"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEL){
+        return new bootstrap.Tooltip(tooltipTriggerEL)
+    })
+</script>

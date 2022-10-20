@@ -1,13 +1,13 @@
 <!--Pestaña "General" la cual se usa para crear una tabla con la información correspondiente-->
 <div class="container">
     <div class="modal-header">
-        <h4 class="modal-title">Nueva Tabla</h4>
+        <h4 class="modal-title"><fa-icon id="iconEliminar" [icon]="iconTabla"></fa-icon> Nueva Tabla</h4>
     </div>
 
     <div class="modal-body" *ngIf="!general; else columnas">
         <nav class="nav nav-tabs nav-fill" >
             <a class="nav-link active" (click)="pestaniaGeneral()">General</a>
-            <a class="nav-link" (click)="pestaniaColumnas()">Columnas</a>
+            <a class="nav-link" (click)="pestaniaColumnas(columnas)">Columnas</a>
         </nav>
         <div class="campos-form">
             <form>
@@ -18,8 +18,8 @@
     </div>
 
     <div class="modal-footer">
-        <button (click)="modal.dismissAll()" class="btn btn-danger" type="button">Cancelar</button>
-        <button (click)="guardarDatosNewTabla()" class="btn btn-success" type="button">Guardar</button>
+        <button (click)="modal.dismissAll()" class="btn btn-danger" type="button">Cancelar  <fa-icon id="iconEliminar" [icon]="iconCancelar"></fa-icon></button>
+        <button (click)="guardarDatosNewTabla()" class="btn btn-success" type="button">Guardar  <fa-icon id="iconEliminar" [icon]="iconGuardar"></fa-icon></button>
     </div>
 </div>
 
@@ -29,9 +29,9 @@
     <div class="modal-body">
         <nav class="nav nav-tabs nav-fill">
             <a class="nav-link" (click)="pestaniaGeneral()">General</a>
-            <a class="nav-link active" (click)="pestaniaColumnas()">Columnas</a>
+            <a class="nav-link active" (click)="pestaniaColumnas(columnas)">Columnas</a>
         </nav>
-        <div class="campos-form">
+        <div class="campos-form" style="width:100%; height:380px; overflow: scroll;">
             <form>
                 <formly-form [model]="modelNewColumnas" [fields]="fieldsNewColumnas" [options]="optionsNewColumnas" [form]="formNewColumnas">
                 </formly-form>

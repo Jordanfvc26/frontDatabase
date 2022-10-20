@@ -9,13 +9,13 @@ import { FieldArrayType } from '@ngx-formly/core';
       <p *ngIf="props.description">{{ props.description }}</p>
 
       <div style="margin:30px 0;">
-        <button class="btn btn-primary" type="button" (click)="add()">Nueva Columna</button>
+        <button class="btn btn-primary" type="button" (click)="add()">Nueva</button>
       </div>
       
       <div *ngFor="let field of field.fieldGroup; let i = index" class="row align-items-baseline">
         <formly-field class="col" [field]="field"></formly-field>
         <div class="col-1 d-flex align-items-center">
-          <button class="btn btn-danger" type="button" (click)="remove(i)">-</button>
+          <button class="btn btn-danger" type="button" (click)="remove(i)"> X </button>
         </div>
       </div>
     </div>

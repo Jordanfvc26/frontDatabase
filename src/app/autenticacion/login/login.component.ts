@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  /*Formulario para el login*/
   form = new FormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
@@ -46,8 +46,9 @@ export class LoginComponent implements OnInit {
 
 
   iniciarSesion() {
-    if (this.model.email == "jordan123") {
-      this.ruta.navigateByUrl('/tablas/dashboard');
+    if (this.model.email == "jordan123" && this.model.password == "12345678") {
+      
+      this.ruta.navigateByUrl('/tablas/listar');
     }
   }
 }
