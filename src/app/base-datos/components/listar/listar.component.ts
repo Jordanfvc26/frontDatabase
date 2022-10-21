@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
 import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 import { Component, OnInit } from '@angular/core';
-import { Tablas } from 'src/app/interfaces/tablas';
+import { Tablas } from 'src/app/base-datos/interfaces/tablas';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import * as iconos from '@fortawesome/free-solid-svg-icons';
+import { ngbPositioning } from '@ng-bootstrap/ng-bootstrap/util/positioning';
 
 @Component({
   selector: 'app-listar',
@@ -28,6 +29,11 @@ export class ListarComponent implements OnInit {
   //Método que abre el modal para poder crear una tabla con sus respectivas columnas
   nuevaTablaColumnas(crearTabla:any){
     this.modal.open(crearTabla,{size: 'xl', scrollable: true});
+  }
+
+  //Método que abre el modal para confirmar si se quiere eliminar la tabla.
+  eliminarTablaColumnas(eliminarTabla:any){
+    this.modal.open(eliminarTabla,{size: 'lg', centered:true});
   }
 
   //Iconos a utilizar

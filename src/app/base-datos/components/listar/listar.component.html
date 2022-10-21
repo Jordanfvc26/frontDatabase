@@ -9,7 +9,6 @@
 </nav>
 
 <div class="container">
-
     <div class="contenedor-texto">
         <h3><fa-icon [icon]="iconTabla"></fa-icon> TABLAS</h3>
         <form>
@@ -36,7 +35,7 @@
                 <td class="acciones">
                     <fa-icon data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
                     <!-- <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon> -->
-                    <fa-icon data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
+                    <fa-icon (click)="eliminarTablaColumnas(eliminarTabla)" data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
                     <fa-icon data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
@@ -47,8 +46,14 @@
 
 
 <!--Modal para crear una nueva tabla-->
-<ng-template #crearTabla let modal>
+<ng-template #crearTabla>
     <app-crear></app-crear>
+</ng-template>
+
+
+<!--Modal para corroborar si se quiere eliminar una tabla-->
+<ng-template #eliminarTabla>
+    <app-eliminar></app-eliminar>
 </ng-template>
 
 

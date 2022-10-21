@@ -1,9 +1,9 @@
-import { ListarComponent } from './listar/listar.component';
-import { EditarComponent } from './../tablas/editar/editar.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { CrearComponent } from './crear/crear.component';
+
+import { LoginComponent } from './components/login/login.component';
+import { CrearComponent } from './components/crear/crear.component';
+import { ListarComponent } from './components/listar/listar.component';
 
 
 const routes:Routes =[
@@ -12,17 +12,16 @@ const routes:Routes =[
     children: [
       { path: 'crear', component: CrearComponent},
       { path: 'listar', component: ListarComponent},
-      { path: 'editar', component: EditarComponent},
+      { path: 'login', component: LoginComponent},
       /*Path cuando no se especifica una ruta correcta*/
-      { path: '**', redirectTo:'listar'}
+      { path: '**', redirectTo:'login'}
     ]
   }
 ]
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class ColumnasRoutingModule { }
+export class BaseDatosRoutingModule { }

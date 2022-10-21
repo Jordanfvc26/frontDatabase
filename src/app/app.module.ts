@@ -1,5 +1,5 @@
+import { BaseDatosModule } from './base-datos/base-datos.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -23,7 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AutenticacionModule,
+    BaseDatosModule,
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,

@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 /*Importamos el componente de Alertas para usar las alertas emergentes.*/
-import { Alerts } from 'src/app/alerts/alerts.component';
+import { Alerts } from 'src/app/base-datos/alerts/alerts.component';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 
 
