@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormGroup } from '@angular/forms';
@@ -11,7 +12,12 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private ruta: Router) { }
+
+  token ="";
+  constructor(
+    private api: ConsumirServiciosService,
+    private ruta: Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -48,6 +54,14 @@ export class LoginComponent implements OnInit {
 
   iniciarSesion() {
     if (this.model.email == "jordan123" && this.model.password == "12345678") {
+
+      //Obtenemos el token y lo almacenamos en el local Storage
+    this.api.obtenerToken().subscribe(data => {
+      this.token = data.token;
+      localStorage.setItem("usuario", this.token);
+      console.log(this.token)
+    })
+
       this.ruta.navigateByUrl('base-datos/listar');
     }
   }

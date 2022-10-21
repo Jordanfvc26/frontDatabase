@@ -12,7 +12,7 @@
     <div class="contenedor-texto">
         <h3><fa-icon [icon]="iconTabla"></fa-icon> TABLAS</h3>
         <form>
-            <button (click)="nuevaTablaColumnas(crearTabla)" type="button" class="btn btn-primary"><fa-icon [icon]="iconAgregar"></fa-icon> Nueva</button>
+            <button (click)="nuevaTablaColumnas(modalCrearTabla)" type="button" class="btn btn-primary"><fa-icon [icon]="iconAgregar"></fa-icon> Nueva</button>
             <input class="search form-control" type="text" placeholder="Buscar tablas...">
         </form>
     </div>
@@ -35,8 +35,8 @@
                 <td class="acciones">
                     <fa-icon data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
                     <!-- <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon> -->
-                    <fa-icon (click)="eliminarTablaColumnas(eliminarTabla)" data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
-                    <fa-icon data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
+                    <fa-icon data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
+                    <fa-icon (click)="eliminarTablaColumnas(modalEliminarTabla, tabla.table)" data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
             </tbody>
@@ -46,13 +46,13 @@
 
 
 <!--Modal para crear una nueva tabla-->
-<ng-template #crearTabla>
+<ng-template #modalCrearTabla>
     <app-crear></app-crear>
 </ng-template>
 
 
 <!--Modal para corroborar si se quiere eliminar una tabla-->
-<ng-template #eliminarTabla>
+<ng-template #modalEliminarTabla>
     <app-eliminar></app-eliminar>
 </ng-template>
 

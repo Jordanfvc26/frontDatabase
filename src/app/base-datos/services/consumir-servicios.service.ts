@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,20 +7,35 @@ import { Observable } from 'rxjs';
 })
 export class ConsumirServiciosService {
 
-  url:string = "http://localhost:3356/api/base-datos";
+  url: string = "http://localhost:3356/api/base-datos";
 
-  constructor(private http:HttpClient) { }
+  token = localStorage.getItem("usuario");
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'bearer ' + this.token
+  });
+  options = { headers: this.headers }
+  
 
-  obtenerTablas():Observable<any>{
-    return this.http.get<any>(this.url+"/mostrar/tablas-columnas");
+  constructor(private http: HttpClient) { }
+
+  //Método para obtener el token.
+  obtenerToken(): Observable<any> {
+    return this.http.get(this.url + "/firmaToken");
   }
 
-  crearTablasColumnas(formDatos: any):Observable<any>{
-    return this.http.post(this.url+"/crear/tabla-columnas", formDatos);
+  //Método para obtener las tablas y listarlas.
+  obtenerTablas(): Observable<any> {
+    return this.http.get<any>(this.url + "/mostrar/tablas-columnas", this.options);
   }
 
-  /*obtenerColumnas():Observable<Columna[]>{
-    let ruta = this.url;
-    return this.http.get<Columna[]>(ruta);
-  }*/
+  //Método para crear las tablas y sus respectivas columnas.
+  crearTablasColumnas(formDatos: any): Observable<any> {
+    return this.http.post(this.url + "/crear/tabla-columnas", formDatos, this.options);
+  }
+
+  //Método para eliminar una tabla con sus columnas
+  eliminarTablasColumnas(nombreTabla: any):Observable<any>{
+    return this.http.delete(this.url + "/borrar/tabla/" + nombreTabla, this.options);
+  }
 }

@@ -63,7 +63,7 @@ export class CrearComponent implements OnInit {
         fieldGroupClassName: 'row',
         fieldGroup:[
           {
-            className: 'col-5',
+            className: 'col-6',
             type: 'input',
             key: 'nombre',
             props: {
@@ -89,7 +89,7 @@ export class CrearComponent implements OnInit {
             },
           },
           {
-            className: 'col-2',
+            className: 'col-3',
             type: 'input',
             key: 'length',
             props: {
@@ -110,7 +110,7 @@ export class CrearComponent implements OnInit {
                 { value: false, label: 'No' },
               ],
             },
-          },*/
+          },
           {
             className: 'col-2',
             key: 'notNull',
@@ -123,7 +123,7 @@ export class CrearComponent implements OnInit {
                 { value: "SI", label: 'Sí' },
               ],
             },
-          },
+          },*/
         ]
       },
     },
