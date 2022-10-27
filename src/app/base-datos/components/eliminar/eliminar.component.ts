@@ -15,7 +15,6 @@ export class EliminarComponent implements OnInit {
   constructor(
     public modal: NgbModal,
     private api: ConsumirServiciosService,
-
   ) {}
 
   ngOnInit(): void {

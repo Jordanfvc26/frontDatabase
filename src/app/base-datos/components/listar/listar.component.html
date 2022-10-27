@@ -30,12 +30,12 @@
             <tbody>
               <tr *ngFor="let tabla of tablas; let i = index">
                 <!--<th scope="row">{{i+1}}</th>-->
-                <td>{{tabla.table}}</td>
-                <td>{{tabla.columnas.length}}</td>
+                <td>{{tabla.table.name}}</td>
+                <td>{{tabla.fields.length}}</td>
                 <td class="acciones">
                     <fa-icon data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
                     <!-- <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon> -->
-                    <fa-icon data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
+                    <fa-icon (click)="asignarPermisos(modalPermisos, tabla.table)" data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
                     <fa-icon (click)="eliminarTablaColumnas(modalEliminarTabla, tabla.table)" data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
@@ -48,6 +48,12 @@
 <!--Modal para crear una nueva tabla-->
 <ng-template #modalCrearTabla>
     <app-crear></app-crear>
+</ng-template>
+
+
+<!--Modal para mostrar los permisos que se asignarán a una tabla-->
+<ng-template #modalPermisos>
+    <app-permisos></app-permisos>
 </ng-template>
 
 

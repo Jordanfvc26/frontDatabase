@@ -34,6 +34,11 @@ export class ConsumirServiciosService {
     return this.http.post(this.url + "/crear/tabla-columnas", formDatos, this.options);
   }
 
+  //Método para poder asignar permisos a una tabla.
+  otorgarPermisos(formDatos:any){
+    return this.http.post(this.url + "/otorgar-permisos", formDatos, this.options);
+  }
+
   //Método para eliminar una tabla con sus columnas
   eliminarTablasColumnas(nombreTabla: any):Observable<any>{
     return this.http.delete(this.url + "/borrar/tabla/" + nombreTabla, this.options);

@@ -38,14 +38,49 @@ export class CrearComponent implements OnInit {
   fieldsNewTabla: FormlyFieldConfig[] = [
     {
       key: 'table',
-      type: 'input',
-      props: {
-        label: 'Nombre:',
-        placeholder: 'usuarios',
-        required: true
-      },
+      fieldGroupClassName: 'row',
+      fieldGroup:[
+        {
+          className: 'col-4',
+          type: 'input',
+          key: 'name',
+          props: {
+            label: 'Nombre:',
+            required: true,
+          },
+        },
+        {
+          className: 'col-4',
+          type: 'input',
+          key: 'description',
+          props: {
+            label: 'Descripción:',
+            required: true,
+          },
+        },
+        {
+          className: 'col-2',
+          type: 'input',
+          key: 'code',
+          props: {
+            label: 'Código:',
+            required: true,
+          },
+        },
+        {
+          className: 'col-2',
+          type: 'input',
+          key: 'company_id',
+          props: {
+            label: 'Company_id:',
+            required: true,
+          },
+        },
+      ]
     },
   ];
+
+
 
   /*Form para crear las Columnas */
   formNewColumnas = new FormGroup({});
@@ -53,7 +88,7 @@ export class CrearComponent implements OnInit {
   optionsNewColumnas: FormlyFormOptions = {};
   fieldsNewColumnas: FormlyFieldConfig[] = [
     {
-      key: 'columnas',
+      key: 'fields',
       type: 'repeat',
       props: {
         addText: 'Add Task',
@@ -63,67 +98,32 @@ export class CrearComponent implements OnInit {
         fieldGroupClassName: 'row',
         fieldGroup:[
           {
-            className: 'col-6',
+            className: 'col-5',
             type: 'input',
-            key: 'nombre',
+            key: 'name',
             props: {
               label: 'Nombre:',
               required: true,
             },
           },
           {
-            className: 'col-3',
-            key: 'tipo',
-            type: 'select',
-            props: {
-              label: 'Tipo de datos',
-              placeholder: 'Seleccione',
-              required: true,
-              options: [
-                { value: "char", label: 'char' },
-                { value: "character", label: 'character' },
-                { value: "numeric", label: 'numeric' },
-                { value: "date", label: 'date' },
-                { value: "boolean", label: 'boolean' },
-              ],
-            },
-          },
-          {
-            className: 'col-3',
+            className: 'col-5',
             type: 'input',
-            key: 'length',
+            key: 'description',
             props: {
-              label: 'Longitud:',
+              label: 'Descripción:',
               required: true,
-            },
-          },
-          /*{
-            className: 'col-1',
-            key: 'primaryKey',
-            type: 'select',
-            props: {
-              label: '¿PK?',
-              placeholder: 'Sí',
-              required: true,
-              options: [
-                { value: true, label: 'Sí' },
-                { value: false, label: 'No' },
-              ],
             },
           },
           {
             className: 'col-2',
-            key: 'notNull',
-            type: 'select',
+            type: 'input',
+            key: 'code',
             props: {
-              label: '¿Acepta Nulos?',
-              placeholder: 'Sí',
+              label: 'Código:',
               required: true,
-              options: [
-                { value: "SI", label: 'Sí' },
-              ],
             },
-          },*/
+          },
         ]
       },
     },
@@ -140,10 +140,16 @@ export class CrearComponent implements OnInit {
 
   //Método que manda a insertar la tabla y columna(s) que se está creando.
   guardarDatosNewTabla(){
+    var objectTabla = JSON.parse(JSON.stringify(
+      this.modelNewTabla.table
+    ))
+    console.log(objectTabla);
+    //Creamos un modelo JSON de acuerdo a los campos que se encuentran en la parte superior.
     var datosTabla : JSON = <JSON><unknown>{
-      "table": this.modelNewTabla.table,
-      "columnas": this.modelNewColumnas.columnas
+      "table": objectTabla,
+      "fields": this.modelNewColumnas.fields
     }
+    console.log(datosTabla);
     this.api.crearTablasColumnas(datosTabla).subscribe(data => {
       if(data.tokenValido){
         this.alertaEmergente.alertaMensajeOK("La tabla se creó correctamente");

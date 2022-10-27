@@ -16,6 +16,7 @@ import { Alerts } from '../base-datos/alerts/alerts.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EliminarComponent } from './components/eliminar/eliminar.component';
+import { PermisosComponent } from './components/permisos/permisos.component';
 
 
 
@@ -25,7 +26,8 @@ import { EliminarComponent } from './components/eliminar/eliminar.component';
     LoginComponent,
     ListarComponent,
     CrearComponent,
-    EliminarComponent
+    EliminarComponent,
+    PermisosComponent
   ],
   providers: [
     Alerts
