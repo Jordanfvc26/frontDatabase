@@ -56,10 +56,9 @@ export class LoginComponent implements OnInit {
     if (this.model.email == "jordan123" && this.model.password == "12345678") {
 
       //Obtenemos el token y lo almacenamos en el local Storage
-    this.api.obtenerToken().subscribe(data => {
+    this.api.obtenerToken(this.model).subscribe(data => {
       this.token = data.token;
       localStorage.setItem("usuario", this.token);
-      console.log(this.token)
     })
 
       this.ruta.navigateByUrl('base-datos/listar');

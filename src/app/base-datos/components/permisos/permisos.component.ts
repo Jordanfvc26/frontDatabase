@@ -36,8 +36,8 @@ export class PermisosComponent implements OnInit {
   fieldsPermisos: FormlyFieldConfig[] = [
     {
       key: 'permisos',
-      
-      fieldGroup:[
+
+      fieldGroup: [
         {
           key: 'select',
           type: 'checkbox',
@@ -85,18 +85,16 @@ export class PermisosComponent implements OnInit {
 
 
   asignarPermisos() {
-    var datosTabla : JSON = <JSON><unknown>{
+    var datosTabla: JSON = <JSON><unknown>{
       "table": PermisosComponent.nombreTabla,
       "permisos": this.modelPermisos.permisos,
       "user": this.modelPermisos.user
     }
 
-    console.log(datosTabla);
-    
+
     this.api.otorgarPermisos(datosTabla).subscribe(data => {
-      //console.log(data)
       this.alertaEmergente.alertaMensajeOK("Se asignaron correctamente los permisos.");
-    },error =>{
+    }, error => {
       this.alertaEmergente.alertMensajeError(error.error);
     })
     this.modal.dismissAll();

@@ -3,6 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 
+import { Alerts } from '../../alerts/alerts.component';
+
+
 @Component({
   selector: 'app-eliminar',
   templateUrl: './eliminar.component.html',
@@ -10,11 +13,12 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
 })
 export class EliminarComponent implements OnInit {
 
-  static nombreTablaEliminar = "";
+  static IDTablaEliminar = 0;
 
   constructor(
     public modal: NgbModal,
     private api: ConsumirServiciosService,
+    public alertaEmergente: Alerts
   ) {}
 
   ngOnInit(): void {
@@ -23,8 +27,10 @@ export class EliminarComponent implements OnInit {
 
   //Método que eliminará la tabla y todas sus columnas
   public eliminarTabla() {
-    this.api.eliminarTablasColumnas(EliminarComponent.nombreTablaEliminar).subscribe(data => {
-      console.log(data)
+    this.api.eliminarTablasColumnas(EliminarComponent.IDTablaEliminar).subscribe(data => {
+      this.alertaEmergente.alertaMensajeOK("Se eliminó la tabla correctamente.")
+    }, error =>{
+      this.alertaEmergente.alertMensajeError(error.error.msj);
     })
     this.modal.dismissAll();
   }

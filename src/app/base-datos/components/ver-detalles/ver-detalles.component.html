@@ -1,0 +1,48 @@
+<!--Pestaña "General" la cual se usa para crear una tabla con la información correspondiente-->
+<div class="container">
+    <div class="modal-header">
+        <h4 class="modal-title"><fa-icon [icon]="iconDetalles"></fa-icon> Detalles</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="campos-form">
+            <br/>
+            <span><b>Nombre: </b></span>
+            <span id="texto"> {{tablas[0].table.name}}</span> 
+            <br/>
+            <span><b>Descripción: </b></span>
+            <span id="texto"> {{tablas[0].table.description}}</span> 
+            <br/>
+            <span><b>Código: </b></span>
+            <span id="texto"> {{tablas[0].table.code}}</span> 
+            <br/>
+
+            <h3 id="titulo">Columnas</h3>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <!--<th class="col-1">#</th>-->
+                    <th class="col-4">Nombre</th>
+                    <th class="col-6">Descripción</th>
+                    <th class="col-2">Código</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tabla of tablas[0].fields; let i = index">
+                    <td>{{tabla.name}}</td>
+                    <td>{{tabla.description}}</td>
+                    <td>{{tabla.code}}</td>
+                  </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button (click)="modal.dismissAll()" class="btn btn-success" type="button">Aceptar  <fa-icon id="iconEliminar" [icon]="iconAceptar"></fa-icon></button>
+    </div>
+</div>
+
+

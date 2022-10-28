@@ -33,10 +33,10 @@
                 <td>{{tabla.table.name}}</td>
                 <td>{{tabla.fields.length}}</td>
                 <td class="acciones">
-                    <fa-icon data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
+                    <fa-icon (click)="verDetalles(modalVerDetalles, tabla.table.id)" data-bs-toggle="mensaje" title="Ver Detalles" id="iconVerDetalles" [icon]="iconVerDetalles"></fa-icon>
                     <!-- <fa-icon id="iconEditar" [icon]="iconEditar"></fa-icon> -->
-                    <fa-icon (click)="asignarPermisos(modalPermisos, tabla.table)" data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>
-                    <fa-icon (click)="eliminarTablaColumnas(modalEliminarTabla, tabla.table)" data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
+                    <!--<fa-icon (click)="asignarPermisos(modalPermisos, tabla.table)" data-bs-toggle="mensaje" title="Permisos" id="iconPermisos" [icon]="iconPermisos"></fa-icon>-->
+                    <fa-icon (click)="eliminarTablaColumnas(modalEliminarTabla, tabla.table.id)" data-bs-toggle="mensaje" title="Eliminar" id="iconEliminar" [icon]="iconEliminar"></fa-icon>
                 </td>
               </tr>
             </tbody>
@@ -48,6 +48,12 @@
 <!--Modal para crear una nueva tabla-->
 <ng-template #modalCrearTabla>
     <app-crear></app-crear>
+</ng-template>
+
+
+<!--Modal para Ver los detalles de una tabla-->
+<ng-template #modalVerDetalles>
+    <app-ver-detalles></app-ver-detalles>
 </ng-template>
 
 

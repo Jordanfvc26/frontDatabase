@@ -1,3 +1,4 @@
+import { VerDetallesComponent } from './../ver-detalles/ver-detalles.component';
 import { PermisosComponent } from './../permisos/permisos.component';
 import { ConsumirServiciosService } from '../../services/consumir-servicios.service';
 import { Component, OnInit, Output } from '@angular/core';
@@ -20,7 +21,7 @@ export class ListarComponent implements OnInit {
   tablas: Tabla[] = []
 
   constructor(
-    private api: ConsumirServiciosService, 
+    private api: ConsumirServiciosService,
     public modal: NgbModal,
     public alertaEmergente: Alerts
   ) { }
@@ -29,9 +30,8 @@ export class ListarComponent implements OnInit {
     //Consumiendo servicio para listar las tablas.
     this.api.obtenerTablas().subscribe(data => {
       this.tablas = data.data;
-      console.log(data)
-    },error =>{
-      this.alertaEmergente.alertMensajeError("No se ha podido consumir el servicio.");
+    }, error => {
+      this.alertaEmergente.alertMensajeError(error.error.msj);
     })
   }
 
@@ -40,18 +40,24 @@ export class ListarComponent implements OnInit {
     this.modal.open(modalCrearTabla, { size: 'xl', scrollable: true });
   }
 
+  //Método que abre el modal para ver los detalles de una tabla
+  verDetalles(modalVerDetalles: any, IDTabla:any){
+    this.modal.open(modalVerDetalles, {size: 'xl', scrollable: true});
+    //Pasamos el ID de la tabla para ver los detalles.
+    VerDetallesComponent.IDTablaEliminar = IDTabla;
+  }
+
   //Método que abre el modal para poder asignar permisos a una tabla
-  asignarPermisos(modalPermisos: any, nombreTabla:any){
+  asignarPermisos(modalPermisos: any, nombreTabla: any) {
     this.modal.open(modalPermisos, { size: 'lg', scrollable: true });
     PermisosComponent.nombreTabla = nombreTabla;
   }
 
   //Método que abre el modal para confirmar si se quiere eliminar la tabla.
-  eliminarTablaColumnas(modalEliminarTabla: any, nombreTabla: any) {
+  eliminarTablaColumnas(modalEliminarTabla: any, IDTabla: any) {
     this.modal.open(modalEliminarTabla, { size: 'lg', centered: true });
-    //Pasamos el nombre de la tabla a eliminar, al componente de Eliminar.
-    EliminarComponent.nombreTablaEliminar = nombreTabla;
-
+    //Pasamos el ID de la tabla a eliminar, al componente de Eliminar.
+    EliminarComponent.IDTablaEliminar = IDTabla;
   }
 
 

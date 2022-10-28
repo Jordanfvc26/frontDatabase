@@ -9,8 +9,9 @@ export class Alerts {
             position: 'center',
             icon: 'success',
             title: mensaje,
-            showConfirmButton: false,
-            timer: 1500
+            showConfirmButton: true,
+        }).then((result) => {
+            window.location.reload();
         })
     }
 
@@ -20,8 +21,7 @@ export class Alerts {
             position: 'center',
             icon: 'error',
             title: mensaje,
-            showConfirmButton: false,
-            timer: 1500
+            showConfirmButton: true,
         })
     }
 }

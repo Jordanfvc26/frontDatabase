@@ -20,10 +20,10 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
 export class CrearComponent implements OnInit {
 
   general: boolean = false;
-  
+
   constructor(
-    public modal: NgbModal, 
-    private api: ConsumirServiciosService, 
+    public modal: NgbModal,
+    private api: ConsumirServiciosService,
     public alertaEmergente: Alerts
   ) { }
 
@@ -39,7 +39,7 @@ export class CrearComponent implements OnInit {
     {
       key: 'table',
       fieldGroupClassName: 'row',
-      fieldGroup:[
+      fieldGroup: [
         {
           className: 'col-4',
           type: 'input',
@@ -50,7 +50,7 @@ export class CrearComponent implements OnInit {
           },
         },
         {
-          className: 'col-4',
+          className: 'col-6',
           type: 'input',
           key: 'description',
           props: {
@@ -64,15 +64,6 @@ export class CrearComponent implements OnInit {
           key: 'code',
           props: {
             label: 'Código:',
-            required: true,
-          },
-        },
-        {
-          className: 'col-2',
-          type: 'input',
-          key: 'company_id',
-          props: {
-            label: 'Company_id:',
             required: true,
           },
         },
@@ -96,9 +87,9 @@ export class CrearComponent implements OnInit {
       },
       fieldArray: {
         fieldGroupClassName: 'row',
-        fieldGroup:[
+        fieldGroup: [
           {
-            className: 'col-5',
+            className: 'col-4',
             type: 'input',
             key: 'name',
             props: {
@@ -107,7 +98,7 @@ export class CrearComponent implements OnInit {
             },
           },
           {
-            className: 'col-5',
+            className: 'col-6',
             type: 'input',
             key: 'description',
             props: {
@@ -131,33 +122,28 @@ export class CrearComponent implements OnInit {
 
 
   //Métodos que cambia el estado de la variable general para poder cambiar de pestaña en el modal
-  pestaniaGeneral(){
+  pestaniaGeneral() {
     this.general = false;
   }
-  pestaniaColumnas(columnas:any){
+  pestaniaColumnas(columnas: any) {
     this.general = true;
   }
 
   //Método que manda a insertar la tabla y columna(s) que se está creando.
-  guardarDatosNewTabla(){
+  guardarDatosNewTabla() {
     var objectTabla = JSON.parse(JSON.stringify(
       this.modelNewTabla.table
     ))
-    console.log(objectTabla);
     //Creamos un modelo JSON de acuerdo a los campos que se encuentran en la parte superior.
-    var datosTabla : JSON = <JSON><unknown>{
+    var datosTabla: JSON = <JSON><unknown>{
       "table": objectTabla,
       "fields": this.modelNewColumnas.fields
     }
-    console.log(datosTabla);
     this.api.crearTablasColumnas(datosTabla).subscribe(data => {
-      if(data.tokenValido){
-        this.alertaEmergente.alertaMensajeOK("La tabla se creó correctamente");
-        this.modal.dismissAll();
-      }
-      else{
-        this.alertaEmergente.alertMensajeError("Existió un error inesperado y no se creó la tabla");
-      }
+      this.alertaEmergente.alertaMensajeOK("La tabla se creó correctamente");
+      this.modal.dismissAll();
+    }, error => {
+      this.alertaEmergente.alertMensajeError(error.error.msj);
     })
   }
 
